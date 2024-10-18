@@ -20,7 +20,7 @@ This 4-bit kogge stone adder is to perform fast addition of 4-bit binary numbers
 *Ensure the design is powered (ena is active), and the reset signal (rst_n) is inactive.
 *Observe the output sum and carry-out values on uo_out. The lower 4 bits of uo_out will represent the 4-bit sum, and uo_out[4] will represent the carry-out.
 
-3.Example Test:
+3. Example Test:
 Input A = 4'b0011 and B = 4'b0101 via ui_in = 8'b01010011.
 The expected output would be the sum 4'b1000 with carry-out 0, so uo_out = 8'b00001000.
 
