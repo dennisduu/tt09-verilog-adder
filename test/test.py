@@ -1,9 +1,5 @@
 # SPDX-FileCopyrightText: © 2024 Tiny Tapeout
 # SPDX-License-Identifier: Apache-2.0
-
-# SPDX-FileCopyrightText: © 2024 Tiny Tapeout
-# SPDX-License-Identifier: Apache-2.0
-
 import cocotb
 from cocotb.clock import Clock
 from cocotb.triggers import ClockCycles
@@ -16,6 +12,12 @@ async def test_project(dut):
     # Set the clock period to 10 us (100 KHz)
     clock = Clock(dut.clk, 10, units="us")
     cocotb.start_soon(clock.start())
+
+    # Apply reset
+    dut.rst_n.value = 0
+    await ClockCycles(dut.clk, 5)  # Keep reset active for a few cycles
+    dut.rst_n.value = 1
+    await ClockCycles(dut.clk, 5)  # Wait for a few cycles after releasing reset
 
     dut._log.info("Test project behavior")
 
@@ -41,6 +43,7 @@ async def test_project(dut):
         assert dut.uo_out[4].value == expected_carry_out, f"Test failed for a={a}, b={b}: expected carry_out={expected_carry_out}, got {dut.uo_out[4].value}"
 
     dut._log.info("All 1000 test cases passed.")
+
 
 
     # Keep testing the module by changing the input values, waiting for
