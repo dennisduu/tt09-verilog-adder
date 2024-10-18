@@ -62,6 +62,7 @@ module tt_um_koggestone_adder4 (
   // Precompute generate and propagate signals
   assign p = a ^ b; // Propagate
   assign g = a & b; // Generate
+  assign c = g;
 
   // Stage 1: Compute generate signals for neighbor 1-bit pairs
   wire g1_1, g1_2, g1_3;
